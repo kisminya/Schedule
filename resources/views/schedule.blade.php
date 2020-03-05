@@ -22,7 +22,11 @@
 </head>
 
 <body>
+
   <div class="container">
+  <div class="text-center my-2">
+  <h1>TV műsor</h1>
+  </div>
     @if(count($programs))
   <div class="d-flex justify-content-center">
       <form action="/schedule" method="GET">
