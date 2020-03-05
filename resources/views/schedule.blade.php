@@ -47,11 +47,11 @@
         <label for="dateSelect">Dátum kiválasztása</label>
         <select name="date" class="form-control" id="dateSelect">
           @foreach($dates as $date)
-          <option value="{{ $date->id }}">{{ substr($date->date_from,0,10) }}</option>
+          <option value="{{ $date->id }}">{{ Carbon\Carbon::parse($date->date_from)->format('Y-m-d') }}</option>
           <!--választott dátum "mentése" -->
             @isset($_GET['date'])
             @if($_GET['date'] == $date->id)
-            <option hidden selected value="{{$date->id}}">{{ substr($date->date_from,0,10) }}</option>
+            <option hidden selected value="{{$date->id}}">{{ Carbon\Carbon::parse($date->date_from)->format('Y-m-d') }}</option>
             @endif
             @endisset
           @endforeach
@@ -68,7 +68,7 @@
     <table class="table table-dark text-center">
       <thead>
         <tr>
-          <th scope="col">{{ substr($programs[0]->date->date_from,0,10 )}}</th>
+          <th scope="col">{{ \Carbon\Carbon::parse($programs[0]->date->date_from)->format('Y-m-d') }}</th>
           <th scope="col">{{ $programs[0]->channel->name }}</th>
         </tr>
       </thead>
@@ -77,7 +77,7 @@
         <tr>
           <td style="width:50%">
             <p>{{ $program->start_time }}</p>
-            <p>Korhatár: {{ $program->age_limit }}</p>
+            <p>Korhatár: {{ empty($program->age_limit) ? "-" : $program->age_limit }}</p>
           </td>
           <td style="width:50">
             <p>{{ $program->title }}</p><small>{{ $program->description }}</small>
