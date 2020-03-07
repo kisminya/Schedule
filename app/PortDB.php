@@ -22,6 +22,7 @@ class PortDB
         $data = $this->api->getData($date);
 
         $this->insert($data);
+        return true;
     }
 
 
